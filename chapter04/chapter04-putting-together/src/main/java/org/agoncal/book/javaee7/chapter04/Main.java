@@ -20,7 +20,7 @@ public class Main {
     Book book = new Book("H2G2", "The Hitchhiker's Guide to the Galaxy", 12.5F, "1-84023-742-2", 354, false);
 
     // 2-Obtains an entity manager and a transaction
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("chapter04PU");
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("chapter04PU"); // chapter04PU_MySQL
     EntityManager em = emf.createEntityManager();
 
     // 3-Persists the book to the database

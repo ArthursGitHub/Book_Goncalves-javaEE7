@@ -2,6 +2,21 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
              version="2.0">
 
+    <persistence-unit name="chapter04TestPU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>org.agoncal.book.javaee7.chapter04.Book</class>
+        <properties>
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
+            <property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>
+            <property name="javax.persistence.schema-generation.scripts.create-target" value="create.sql"/>
+            <property name="javax.persistence.schema-generation.scripts.drop-target" value="drop.sql"/>
+            <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:chapter04DB;create=true"/>
+            <property name="javax.persistence.sql-load-script-source" value="insert.sql"/>
+            <property name="eclipselink.logging.level" value="INFO"/>
+        </properties>
+    </persistence-unit>
+
     <persistence-unit name="chapter04PU">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <properties>
@@ -19,5 +34,21 @@
             -->
         </properties>
     </persistence-unit>
+
+    <persistence-unit name="chapter04PU_MySQL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/goncalves?useSSL=false&amp;serverTimezone=UTC"/>
+            <property name="hibernate.connection.username" value="root"/>
+            <property name="hibernate.connection.password" value=""/>
+            <property name="hibernate.current_session_context_class" value="org.hibernate.context.internal.ThreadLocalSessionContext"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+
 
 </persistence>        
