@@ -2,7 +2,11 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
              version="2.0">
 
-    <persistence-unit name="chapter04TestPU" transaction-type="RESOURCE_LOCAL">
+
+    <!--
+        EclipseLink - Derby
+    -->
+    <persistence-unit name="chapter04TestPU_EclipseDerby" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>org.agoncal.book.javaee7.chapter04.Book</class>
         <properties>
@@ -17,7 +21,33 @@
         </properties>
     </persistence-unit>
 
-    <persistence-unit name="chapter04PU">
+    <!--
+            EclipseLink - MySQL
+    -->
+    <persistence-unit name="chapter04TestPU_EclipseMySQL" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>org.agoncal.book.javaee7.chapter04.Book</class>
+        <properties>
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
+            <property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>
+            <property name="javax.persistence.schema-generation.scripts.create-target" value="create.sql"/>
+            <property name="javax.persistence.schema-generation.scripts.drop-target" value="drop.sql"/>
+
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/goncalves?useSSL=false&amp;serverTimezone=UTC"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <!--<property name="eclipselink.ddl-generation" value="create-tables"/>-->
+
+            <property name="javax.persistence.sql-load-script-source" value="insert.sql"/>
+            <property name="eclipselink.logging.level" value="INFO"/>
+        </properties>
+    </persistence-unit>
+
+    <!--
+        Hibernate - Derby
+    -->
+    <persistence-unit name="chapter04PU_HibernateDerby">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
@@ -35,7 +65,10 @@
         </properties>
     </persistence-unit>
 
-    <persistence-unit name="chapter04PU_MySQL">
+    <!--
+        Hibernate - MySQL
+    -->
+    <persistence-unit name="chapter04PU_HibernateMySQL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
@@ -50,5 +83,4 @@
         </properties>
     </persistence-unit>
 
-
-</persistence>        
+</persistence>
